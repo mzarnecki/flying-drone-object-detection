@@ -54,8 +54,6 @@ for rotation in range(max_rotations):
 
     #when face detected do some manover and land
     if len(results) > 0:
-        tello.move_back(50)
-        tello.move_back(30)
         show_image(imagePath)
         break
 
