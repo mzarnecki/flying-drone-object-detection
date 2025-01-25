@@ -1,7 +1,10 @@
 from djitellopy import Tello
+import matplotlib
 from matplotlib import pyplot as plt
 import cv2
 import sys
+
+matplotlib.use('TKAgg')
 
 def detect_face(image_source):
     # open image
@@ -10,7 +13,7 @@ def detect_face(image_source):
     # grayscale image
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # use predifined haar cascade filtersfrom OpenCV lib
+    # use predefined haar cascade filtersfrom OpenCV lib
     # https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml
     classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
     results = classifier.detectMultiScale(img_gray, minSize =(40, 40))
@@ -29,6 +32,7 @@ def show_image(imagePath):
             cv2.rectangle(img_rgb, (x, y), (x + height, y + width), (0, 255, 0), 5)
     plt.subplot(1, 1, 1)
     plt.imshow(img_rgb)
+    plt.savefig('capture.png')
     plt.show()
 
 #initialize drone and take off    
@@ -52,7 +56,7 @@ for rotation in range(max_rotations):
     cv2.imwrite(imagePath, frame_read.frame)
     results = detect_face(imagePath)
 
-    #when face detected do some manover and land
+    #when face is detected, do some manoeuver and land
     if len(results) > 0:
         show_image(imagePath)
         break
