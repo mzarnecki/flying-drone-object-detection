@@ -33,7 +33,7 @@ def show_image(imagePath):
     plt.subplot(1, 1, 1)
     plt.imshow(img_rgb)
     plt.savefig('capture.png')
-    plt.show()
+    plt.show(block=False) #avoid breaking program execution when image is displayed
 
 #initialize drone and take off    
 tello = Tello()
@@ -62,4 +62,5 @@ for rotation in range(max_rotations):
         break
 
 tello.land()
+plt.show()
 sys.exit()
