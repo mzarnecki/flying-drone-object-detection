@@ -1,3 +1,5 @@
 djitellopy
 matplotlib
 opencv-python
+openai
+dotenv
